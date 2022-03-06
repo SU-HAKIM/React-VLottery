@@ -19,8 +19,12 @@ contract Lottery{
         _;
     }
 
-    function getBalance() public view onlyByOwner returns(uint _balance){
+    function getBalance() public view returns(uint _balance){
         return address(this).balance;
+    }
+
+    function getPlayers() public view returns(address[] memory){
+        return players;
     }
 
     function getWinnerByLotteryId(uint _id) public view returns(address payable _winner){
@@ -36,10 +40,6 @@ contract Lottery{
 
     function getRandomNumber() public view returns(uint _randomNunber){
         return uint(keccak256(abi.encodePacked(owner,block.timestamp)));
-    }
-
-    function getPlayers() public view returns(address[] memory){
-        return players;
     }
 
     function pickWinner() public onlyByOwner{
